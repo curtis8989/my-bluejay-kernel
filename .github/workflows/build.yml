@@ -1,12 +1,21 @@
-name: "Build kernels"
+name: Build Kernel
 on:
-  push:
-    branches: [ main ]
+  watch:
+    types: [started]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+    - name: Setup Configuration
+      run: |
+        echo "CONFIG_LOCAL_VERSION=text" >> .config
+    - name: Build Environment
+      run: |
+        sudo apt update -y
+        sudo apt-get install -y tzdata lz4 scons libncurses5-dev libncursesw5-dev libssl-dev bc bison flex libelf-dev kmod cpio lzma python3 python2
+    - name: Run Build
+      run: |
+        echo "Starting kernel compile process..."
