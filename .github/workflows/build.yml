@@ -1,11 +1,9 @@
 name: "Build kernels"
-
-env:
-  CONFIGURATION: "repos.json"
-  OUT_DIR: "out"
-
 on:
   workflow_dispatch:
+  push:
+    branches: [ main ]
+
 
 jobs:
   Set-repos:
