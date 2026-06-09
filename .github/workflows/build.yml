@@ -1,18 +1,16 @@
-name: "Build kernels"
+namname: "Build kernels"
 on:
   workflow_dispatch:
   push:
     branches: [ main ]
 
-
 jobs:
-  Set-repos:
-    name: "🐂 Parse repos.json"
+  build:
     runs-on: ubuntu-latest
-    outputs:
-      repos: ${{ steps.generate-matrix.outputs.repos }}
     steps:
-      - name: "😄 Checkout"
+      - name: Open trigger
+        run: echo "Starting build"
+
         uses: actions/checkout@v4
       - name: "Print repos.json"
         run: cat ${{ env.CONFIGURATION }}
